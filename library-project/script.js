@@ -8,21 +8,22 @@ const options = {
 
 let bookReadStatus = false;
 
-function Book (title, author, numberOfPages, isRead) {
-    this.title = title;
-    this.author = author;
-    this.numberOfPages = numberOfPages;
-    this.isRead = isRead;
-}
+class Book  {
+    constructor(title, author, numberOfPages, isRead) {
+        this.title = title;
+        this.author = author;
+        this.numberOfPages = numberOfPages;
+        this.isRead = isRead;
+    }
 
-function addBookToLibrary(book) {
-    return myLibrary.push(book);
-}
+    addBookToLibrary() {
+        return myLibrary.push({title: this.title, author : this.author, numberOfPages: this.numberOfPages, isRead: this.isRead});
+    }
 
-function displayBook() {
+    displayBook() {
     bookContainer.innerHTML = '';
 
-	myLibrary.forEach((book) => {
+	    myLibrary.forEach((book) => {
 		const bookBox = document.createElement('div');
 		bookBox.classList.add('bookBox');
     
@@ -41,33 +42,32 @@ function displayBook() {
         bookPages.style.margin = '0em';
 		bookPages.innerText = `${book.numberOfPages} pages`;
 
-		// const bookReadStatus = document.createElement('p');
-		// bookReadStatus.classList.add('bookReadStatus');
-        // bookReadStatus.style.margin = '0em';
-        // bookReadStatus.innerText = `Read: ${book.isRead}`;
         const buttonContainer = document.createElement('div');
         buttonContainer.classList.add('buttonContainer');
 
         const removeBook = document.createElement('button');
-        removeBook.innerHTML = "<img src = \"./images/delete-icon.png\" height=\"20px\" width=\"20px\" alt=\"delete-icon-image\">";
+        removeBook.innerHTML = 'X';
         removeBook.classList.add('removeBook');
         removeBook.setAttribute('id', `${book.title}`);
         removeBook.style.border = '1px solid blue';
         removeBook.style.boxShadow = '0 0 10px';
-        removeBook.style.backgroundColor = 'rgb(234, 196, 168)';
-        removeBook.style.margin = '0px';
-        removeBook.style.padding = '0px';
+        
+        removeBook.addEventListener('click', (e) => {
+            bookBox.innerHTML = '';
+            bookBox.style = '';
+            myLibrary = myLibrary.filter((book) => book.title !== e.target.id);
+        });
 
-        const editBook = document.createElement('button');
-        editBook.innerHTML = "<img src = \"./images/edit-icon.png\" height=\"20px\" width=\"20px\" alt=\"edit-icon-image\">";
-        editBook.classList.add('editBook');
-        editBook.setAttribute('id', `${editBook.title}`);
-        editBook.style.border = 'none';
-        editBook.style.backgroundColor = 'rgb(234, 196, 168)';
-        editBook.style.margin = '0px';
-        editBook.style.padding = '0px';
-        editBook.style.border = '1px solid blue';
-        editBook.style.boxShadow = '0 0 10px';
+        // const editBook = document.createElement('button');
+        // editBook.innerHTML = "<img src = \"./images/edit-icon.png\" height=\"20px\" width=\"20px\" alt=\"edit-icon-image\">";
+        // editBook.classList.add('editBook');
+        // editBook.setAttribute('id', `${book.title}`);
+        // editBook.style.border = 'none';
+        // editBook.style.backgroundColor = 'rgb(234, 196, 168)';
+        // editBook.style.margin = '0px';
+        // editBook.style.padding = '0px';
+        // editBook.style.border = '1px solid blue';
+        // editBook.style.boxShadow = '0 0 10px';
 
         const readIcon = document.createElement('p');
         readIcon.classList.add('readIcon');
@@ -95,16 +95,12 @@ function displayBook() {
         bookBox.style.width = '500%';
         bookBox.style.height = '100%';
 
-        removeBook.addEventListener('click', (e) => {
-            bookBox.innerHTML = '';
-            bookBox.style = '';
-            myLibrary = myLibrary.filter((book) => book.title !== e.target.id);
-        });
 
 		bookContainer.appendChild(bookBox);
     });
 
-    return container.appendChild(bookContainer);
+        return container.appendChild(bookContainer);
+    }   
 }
 
 const addNewBook = () => {
@@ -185,23 +181,23 @@ const addNewBook = () => {
 
         const new_book = new Book(bookTitle, bookAuthor, pageNumber, bookReadStatus);
 
-        addBookToLibrary(new_book);
+        new_book.addBookToLibrary();
 
         form.innerHTML = '';
         form.style = '';
 
-        displayBook();
-    });
-}
+        new_book.displayBook();
+        });
+    }
 
-const bookSection = document.getElementById('bookSection');
+    const bookSection = document.getElementById('bookSection');
 
-const booksDisplay = document.getElementById('booksDisplay');
+    const booksDisplay = document.getElementById('booksDisplay');
 
-const newBook = document.getElementById('newBook');
-newBook.addEventListener('click', addNewBook);
+    const formDisplay = document.getElementById('formDisplay');
 
-const formDisplay = document.getElementById('formDisplay');
+    const newBook = document.getElementById('newBook');
+    newBook.addEventListener('click', addNewBook);
 
-const container = document.getElementById('container');
-const bookContainer = document.getElementById('bookContainer');
+    const container = document.getElementById('container');
+    const bookContainer = document.getElementById('bookContainer');
