@@ -1,0 +1,83 @@
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background-image: linear-gradient(to right, rgba(30, 119, 221, 0), rgba(139, 99, 209, 0.58));
+}
+
+.welcome {
+    background-image: linear-gradient(to right, rgb(113, 102, 208) , rgb(215, 215, 175));
+    margin: 5px;
+    padding: 5px;
+}
+
+h1 {
+    color: rgb(75, 75, 129);
+    text-align: center;
+}
+
+nav {
+    display: flex;
+    justify-content: space-evenly;
+    align-items: center;
+}
+
+.about {
+    color: rgb(75, 75, 129);
+    margin: 5px;
+    padding: 5px;
+}
+
+h2 {
+    text-align: center;
+}
+
+p {
+    text-align: center;
+}
+
+img {
+    display: block;
+    margin: auto;
+    padding: 5px;
+}
+
+.menu {
+    display: flex;
+    flex-direction: column;
+    color: rgb(75, 75, 129);
+    margin: 5px;
+    padding: 5px;
+}
+
+h3 {
+    text-align: center;
+    border: 1px solid rgb(75, 75, 129);
+    width: 20%;
+    margin-left: auto;
+    margin-right: auto;
+    padding: 5px;
+    background-image: linear-gradient(to right, rgb(113, 102, 208) , rgb(215, 215, 175));
+    color: rgb(75, 75, 129);
+}
+
+h4 {
+    text-align: center;
+    color: rgb(75, 75, 129);
+}
+
+button {
+    background-color: beige;
+    border-style: none;
+    padding: 3px;
+    width: 10%;
+    border-radius: 10%;
+    color: rgb(75, 75, 129);
+}
+
+.contact {
+    color: rgb(75, 75, 129);
+}
+
+.price {
+    font-weight: bold;
+    color: rgb(59, 6, 109);
+}
