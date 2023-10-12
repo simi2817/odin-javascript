@@ -1,0 +1,35 @@
+* {
+    font-family: fantasy;
+}
+
+body {
+    background-image: linear-gradient(to right, rgb(78, 69, 65), rgb(203, 194, 157));
+}
+
+h1 {
+    text-align: center;
+    padding: 5px;
+    margin: 50px;
+    color: rgb(70, 67, 57);
+}
+
+#center {
+    display: grid;
+    justify-content: center;
+}
+
+#container {
+    border: 2px solid rgb(108, 107, 106);
+    box-shadow: 0 0 10px;
+    display: grid;
+    background-color: aliceblue;
+    grid-template-rows: repeat(3, calc(500px/3));
+    grid-template-columns: repeat(3, calc(500px/3));
+    width: 500px;
+    height: 500px;
+    overflow: hidden;
+}
+
+.section {
+    border: 1px solid rgb(81, 78, 78);
+}
