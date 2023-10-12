@@ -1,0 +1,13 @@
+
+* {
+    font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+h1 {
+    text-align: center;
+}
+
+.priorityContainer {
+    margin: 5px;
+    padding: 5px;
+}
