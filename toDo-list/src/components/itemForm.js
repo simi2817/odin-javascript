@@ -1,6 +1,8 @@
-import addNewItem from "./addNewItem";
+import addItem from "./addItem";
 
-function newItem() {
+let storage = [];
+
+function newItem(projectName) {
     const priority = ["low", "med", "high"];
     const section = document.createElement('div');
     section.classList.add('newItem');
@@ -46,7 +48,8 @@ function newItem() {
 
     submit.addEventListener('click', (e) => {
         e.preventDefault();
-        addNewItem();
+        addItem(storage, projectName);
+        form.innerHTML = '';
     });
 
     return section;
