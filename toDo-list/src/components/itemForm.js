@@ -1,62 +1,68 @@
-import addItem from "./addItem";
+import addItem from './updateStorage';
+import displayComponent from './displayComponent';
+import generateList from './generateList';
+import { storage } from './storage';
 
-let storage = [];
+export default function newItem(projectName = null) {
+  console.log(projectName.isTrusted);
 
-function newItem(projectName) {
-    const priority = ["low", "med", "high"];
-    const section = document.createElement('div');
-    section.classList.add('newItem');
+  const br = document.createElement('br');
+  const priority = ['low', 'med', 'high'];
 
-    const form = document.createElement('form');
-    form.setAttribute('method', 'post');
-    form.setAttribute('action', 'submit');
+  const section = document.createElement('div');
+  section.classList.add('newItem');
 
-    const title = document.createElement('input');
-    title.setAttribute('type', 'text');
-    title.setAttribute('id', 'title');
-    title.setAttribute('placeholder', 'Title');
+  const form = document.createElement('form');
+  form.setAttribute('method', 'post');
+  form.setAttribute('action', 'submit');
 
-    const description = document.createElement('input');
-    description.setAttribute('type', 'text');
-    description.setAttribute('id', 'desc');
-    description.setAttribute('placeholder', 'Description');
+  const title = document.createElement('input');
+  title.setAttribute('type', 'text');
+  title.setAttribute('id', 'title');
+  title.setAttribute('placeholder', 'Title');
 
-    const dueDate = document.createElement('input');
-    dueDate.setAttribute('type', 'date');
-    dueDate.setAttribute('id', 'date');
+  const description = document.createElement('input');
+  description.setAttribute('type', 'text');
+  description.setAttribute('id', 'desc');
+  description.setAttribute('placeholder', 'Description');
 
-    const priorContainer = document.createElement('select');
-    priorContainer.setAttribute('id', 'prior');
+  const dueDate = document.createElement('input');
+  dueDate.setAttribute('type', 'date');
+  dueDate.setAttribute('id', 'date');
 
-    priority.forEach(prior => {
-        const option = document.createElement('option');
-        option.textContent = prior;
-        priorContainer.appendChild(option);
-    });
+  const priorContainer = document.createElement('select');
+  priorContainer.setAttribute('id', 'prior');
 
-    const submit = document.createElement('button');
-    submit.setAttribute('id', 'submit');
-    submit.textContent = 'Submit';
+  priority.forEach((prior) => {
+    const option = document.createElement('option');
+    option.textContent = prior;
+    priorContainer.appendChild(option);
+  });
 
-    form.appendChild(title);
-    form.appendChild(description);
-    form.appendChild(dueDate);
-    form.appendChild(priorContainer);
-    form.appendChild(submit);
+  const submit = document.createElement('button');
+  submit.setAttribute('id', 'submit');
+  submit.textContent = 'Submit';
 
-    section.appendChild(form);
+  form.appendChild(title);
+  form.appendChild(br.cloneNode());
+  form.appendChild(description);
+  form.appendChild(br.cloneNode());
+  form.appendChild(dueDate);
+  form.appendChild(br.cloneNode());
+  form.appendChild(priorContainer);
+  form.appendChild(br.cloneNode());
+  form.appendChild(submit);
 
-    submit.addEventListener('click', (e) => {
-        e.preventDefault();
-        addItem(storage, projectName);
-        form.innerHTML = '';
-    });
+  section.appendChild(form);
 
-    return section;
-}
+  submit.addEventListener('click', (e) => {
+    e.preventDefault();
+    const updatedStorage = addItem(storage, projectName);
+    generateList(updatedStorage);
+    form.innerHTML = '';
+  });
 
-export default function displayForm() {
-    const main = document.getElementById('main');
-    main.textContent = "";
-    main.appendChild(newItem());
+  displayComponent(section);
+
+  return section;
 }

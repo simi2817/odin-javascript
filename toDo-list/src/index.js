@@ -1,3 +1,3 @@
-import display from "./components/home";
+import home from './components/home';
 
-document.body.appendChild(display());
+document.body.appendChild(home());

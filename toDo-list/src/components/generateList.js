@@ -1,55 +1,52 @@
-
-import getDate from "./getDate";
+/* eslint-disable no-restricted-syntax */
+import getDate from './getDate';
+import displayComponent from './displayComponent';
+import priorityColor from './priorityColor';
 
 export default function generateList(storage) {
-    const container = document.createElement('div');
-    container.classList.add('listContainer');
+  const listContainer = document.createElement('div');
+  listContainer.classList.add('listContainer');
 
-    storage.forEach((list) => {
-        const section = document.createElement('div');
-        section.classList.add('listGenerator');
-        section.addEventListener('click', () => {
-            section.classList.toggle('done');
-        })
-        
-        const priority = document.createElement('p');
-        priority.textContent = list["priority"];
-        priority.classList.add("priority");
-        switch(list["priority"]) {
-            case 'low': 
-                priority.style.backgroundColor = 'rgb(85, 169, 190)';
-                break;
-            case 'med':
-                priority.style.backgroundColor = 'rgb(206, 162, 81)';
-                break;
-            case 'high':
-                priority.style.backgroundColor = 'rgb(194, 91, 78)';
-                break;
-        }
-        section.appendChild(priority);
+  const storageKeys = Object.keys(storage);
 
-        const title = document.createElement('h3');
-        title.textContent = list["title"];
-        title.classList.add("title");
-        section.appendChild(title);
+  for (const key of storageKeys) {
+    const projectName = document.createElement('h2');
+    projectName.textContent = key;
+    listContainer.appendChild(projectName);
 
-        const desc = document.createElement('p');
-        desc.textContent = list["description"];
-        desc.classList.add("desc");
-        section.appendChild(desc);
+    for (const list of storage[key]) {
+      const section = document.createElement('div');
+      section.classList.add('listGenerator');
+      section.addEventListener('click', () => {
+        section.classList.toggle('done');
+      });
 
-        const date = document.createElement('p');
-        const dueDate = getDate(list["dueDate"]);
-        date.textContent = dueDate;
-        date.classList.add("date");
-        section.appendChild(date);  
+      const priority = document.createElement('p');
+      priority.textContent = list.priority;
+      priority.classList.add('priority');
+      priorityColor(list.priority, priority);
+      section.appendChild(priority);
 
-        container.appendChild(section);
-    });
+      const title = document.createElement('h3');
+      title.textContent = list.title;
+      title.classList.add('title');
+      section.appendChild(title);
 
-    const main = document.getElementById('main');
-    main.textContent = "";
-    main.appendChild(container);
+      const desc = document.createElement('p');
+      desc.textContent = list.description;
+      desc.classList.add('desc');
+      section.appendChild(desc);
 
-    return container;
+      const date = document.createElement('p');
+      const dueDate = getDate(list.dueDate);
+      date.textContent = dueDate;
+      date.classList.add('date');
+      section.appendChild(date);
+
+      listContainer.appendChild(section);
+    }
+  }
+
+  displayComponent(listContainer);
+  return listContainer;
 }

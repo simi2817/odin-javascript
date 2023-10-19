@@ -3,6 +3,7 @@
 * {
     font-family: 'Permanent Marker', cursive;
     box-sizing:border-box;
+    color:rgb(98, 83, 65)
 }
 
 h1 {
@@ -10,7 +11,20 @@ h1 {
     position: relative;
     text-align: center;
     border: 1px solid yellowgreen;
-    background-color: bisque;
+    background-color: rgb(225, 226, 191);
+    width: 30%;
+    margin: auto;
+}
+
+h2 {
+  font-size: 25px; 
+  position: relative;
+  text-align: center;
+  border: 1px solid yellowgreen;
+  background-color:  rgb(225, 226, 191);
+  width: 30%;
+  margin: auto;
+  margin-top: 10px;
 }
 
 .priorityContainer {
@@ -19,7 +33,7 @@ h1 {
 }
 
 body {
- 	background:#444; 
+  background-image: linear-gradient(to right, #7b808d , rgb(90, 169, 161));
 }
 
 .listGenerator {
@@ -49,7 +63,7 @@ body {
 }
 
 .newProject {
-  border: 2px solid yellowgreen;
+  border: 2px solid rgb(140, 183, 162);
   height: 500px;
   width: 500px;
 }
@@ -63,20 +77,28 @@ body {
   padding: 5px;
   flex-wrap: wrap;
   background-color: rgb(98, 83, 65);
+  margin-top: 30px;
 }
 
 .welcome {
   display: flex;
   flex-direction: row;
+  margin: auto;
   height: 50px;
   width: 300px;
   border-style: none;
+  margin-top: 50px;
 }
 
 button {
   margin: 5px;
-  padding: 5px;
-  background-color: bisque;
+  padding: 10px;
+  background-color: rgb(234, 225, 213);
+  text-decoration: none;
+  border: none;
+  font-size: small;
+  height: 50px;
+  width: 110px;
 }
 
 .priority {
@@ -87,4 +109,45 @@ button {
 
 .title, .desc, .date {
   margin: 0em;
+}
+
+.newProject {
+  margin: auto;
+  margin-top: 30px;
+}
+
+.newItem {
+  margin: auto;
+  border: 3px solid rgb(111, 128, 0);
+  width: 500px;
+  margin-top: 30px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  padding: 10px;
+}
+
+input[type=text], select {
+  width: 100%;
+  height: 40%;
+  padding: 4px;
+  margin: 8px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+}
+
+input[type=date], select {
+  width: 100%;
+  height: 40%;
+  padding: 4px;
+  margin: 8px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+}
+
+button:hover {
+  cursor:pointer; 
+  background-color: rgb(160, 144, 121);
+  color: whitesmoke;
 }
