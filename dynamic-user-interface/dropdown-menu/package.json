@@ -1,11 +1,12 @@
 {
   "name": "dropdown-menu",
   "version": "1.0.0",
-  "description": "to create a drop down menu",
+  "description": "",
   "main": "script.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
+  "keywords": [],
   "author": "",
   "license": "ISC"
 }
