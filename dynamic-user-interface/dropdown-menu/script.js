@@ -2,7 +2,7 @@ const dropdownBtn = document.getElementById("btn");
 const dropdownMenu = document.getElementById("dropdown");
 const toggleArrow = document.getElementById("arrow");
 
-const toggleDropdown = function () {
+export default function toggleDropdown() {
     dropdownMenu.classList.toggle("show");
     toggleArrow.classList.toggle("arrow");
   };

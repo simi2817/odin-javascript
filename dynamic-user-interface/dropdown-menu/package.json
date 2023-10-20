@@ -1,16 +1,20 @@
 {
-  "name": "dropdown-menu",
+  "name": "@dropdown-menu/dropdown-menu",
   "version": "1.0.0",
-  "description": "",
+  "main": "script.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/simi2817/odin-javascript.git"
+    "url": "git+https://github.com/simi2817/odin-javascript.git"
   },
   "keywords": [],
-  "author": "",
+  "author": "simi2817",
   "license": "ISC",
-  "homepage": "https://github.com/simi2817/odin-javascript/tree/main/dynamic-user-interface/dropdown-menu"
+  "homepage": "https://github.com/simi2817/odin-javascript/tree/main/dynamic-user-interface/dropdown-menu",
+  "bugs": {
+    "url": "https://github.com/simi2817/odin-javascript/issues"
+  },
+  "description": ""
 }
