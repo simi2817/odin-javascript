@@ -49,7 +49,7 @@ body {
     inset 0 -40px 40px rgba(0,0,0,0.2),
     inset 0 25px 10px rgba(0,0,0,0.2),
     0 5px 6px 5px rgba(0,0,0,0.2);
-  line-height:1.7em;
+  line-height:1.3em;
   font-size:19px;
   color:#130d6b;
 }
@@ -58,14 +58,25 @@ body {
  	cursor:pointer; 
 }
 
+.closeButton {
+  position: absolute;
+  background: red;
+  color: white;
+  top: -15px;
+  right: -5px;
+  height: 28px;
+  width: 20px;
+  border-style: none;
+}
+
 .done {
  	text-decoration:line-through; 
 }
 
 .newProject {
   border: 2px solid rgb(140, 183, 162);
-  height: 500px;
-  width: 500px;
+  height: 300px;
+  width: 350px;
 }
 
 .listContainer {
@@ -107,8 +118,8 @@ button {
   text-align: center;
 }
 
-.title, .desc, .date {
-  margin: 0em;
+#title, #desc, #date, #projectName {
+  margin: 0.5em;
 }
 
 .newProject {
@@ -116,7 +127,7 @@ button {
   margin-top: 30px;
 }
 
-.newItem {
+.newItem, .createProject {
   margin: auto;
   border: 3px solid rgb(111, 128, 0);
   width: 500px;

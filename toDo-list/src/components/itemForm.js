@@ -4,8 +4,6 @@ import generateList from './generateList';
 import { storage } from './storage';
 
 export default function newItem(projectName = null) {
-  console.log(projectName.isTrusted);
-
   const br = document.createElement('br');
   const priority = ['low', 'med', 'high'];
 

@@ -2,6 +2,7 @@
 import getDate from './getDate';
 import displayComponent from './displayComponent';
 import priorityColor from './priorityColor';
+import deleteList from './deleteList';
 
 export default function generateList(storage) {
   const listContainer = document.createElement('div');
@@ -20,6 +21,14 @@ export default function generateList(storage) {
       section.addEventListener('click', () => {
         section.classList.toggle('done');
       });
+
+      const closeButton = document.createElement('button');
+      closeButton.classList.add('closeButton');
+      closeButton.textContent = 'x';
+      closeButton.addEventListener('click', () => {
+        deleteList(list.title);
+      });
+      section.appendChild(closeButton);
 
       const priority = document.createElement('p');
       priority.textContent = list.priority;
