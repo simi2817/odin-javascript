@@ -33,3 +33,26 @@ h1 {
 .section {
     border: 1px solid rgb(81, 78, 78);
 }
+
+.marker {
+    font-size: 300%;
+    text-align: center;
+}
+
+#result {
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: 40px;
+    background-color: white;
+    height: 5vh;
+    border: 2px solid rgb(121, 109, 63);
+    box-shadow: 0 0 10px;
+    text-align: center;
+    width: 200px;
+}
+
+#restart {
+    display: flex;
+    justify-content: center;
+    margin-top: 20px;
+}

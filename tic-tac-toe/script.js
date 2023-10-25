@@ -1,3 +1,19 @@
+let round = 1;
+let clickedGrids = [""];
+let XGrid = [];
+let OGrid = [];
+let winningCombination =  [
+    [1,2,3],
+    [1,5,9],
+    [1,4,7],
+    [2,5,8],
+    [3,6,9],
+    [3,5,7],
+    [4,5,6],
+    [7,8,9]
+];
+let XWin = false;
+let OWin = false;
 class GameBoard {
     generate() {
         const board = new Array(9).fill("");
@@ -15,59 +31,128 @@ class GameBoard {
 class Player {
     constructor(player, marker) {
         this.player = player;
-        this.marker = marker;
+        this.marker = marker
+    }
+
+    setMarker(currMarker) {
+        return this.marker = currMarker;
     }
 
     getMarker() {
         return this.marker;
     }
+
+    nextRound() {
+        return round++;
+    }
 }
 
 class XOMarker {
-    clickedGrids = [""];
-
     constructor(gridID) {
         this.gridID = gridID;
     }
 
-    toggleMarker(inputMarker) {
-        if(!this.clickedGrids.includes(this.gridID)) {
+    toggleMarker() {
+        const player = new Player('player','O');
+        const result = new Result();
+
+        if(!clickedGrids.includes(this.gridID)) {
             const marker = document.createElement('h2');
             marker.classList.add('marker');
-            marker.textContent = inputMarker;
-            marker.style.fontSize = '400%';
-            marker.style.textAlign = 'center';
-            this.clickedGrids.push(this.gridID);
+            if(round % 2 !== 0) {
+                marker.textContent = 'X';
+                XGrid.push(parseInt(this.gridID));
+                result.checkCombination();
+                player.setMarker('O');
+                player.nextRound();
+            }
+            else {
+                marker.textContent = 'O';
+                OGrid.push(parseInt(this.gridID));
+                result.checkCombination();
+                player.setMarker('X');
+                player.nextRound();
+            }      
+            clickedGrids.push(this.gridID);
             return marker;
         }
     }
 }
 
-class Marker {
-    
-    add(inputMarker) {
+class Marker {   
+    add() {
         const section = document.querySelectorAll('.section');
         section.forEach((grid) => {
             grid.addEventListener('click', (e) => {
                 const identifyMarker = new XOMarker(e.target.id);
-                const output = identifyMarker.toggleMarker(inputMarker);
-                grid.appendChild(output);
+                const output = identifyMarker.toggleMarker();
+                if(output !== undefined)
+                    grid.appendChild(output);
             });
         });
         return section;
     }
+    disable() {
+        const section = document.querySelectorAll('.section');
+        section.forEach((grid) => {
+            grid.removeEventListener('click', this.add);
+        });
+    }
+}
+
+class Result {
+    checkCombination() {
+        if(XGrid.length >= 3 || OGrid.length >= 3) {
+            for(let combination of winningCombination) {
+               if(XGrid.every(item => combination.includes(item))) {
+                XWin = true;
+                disableGrid();
+                break;
+               }
+               else if(JSON.stringify(OGrid.sort()) === JSON.stringify(combination)) {
+                OWin = true;
+                disableGrid();
+                break;
+               }
+            }
+        }
+        printResult();
+    }
 }
 
 function displayController() {
-
-    const playerOne = new Player('Player-X', 'X');
-    const playerTwo = new Player('Player-O', 'O');
-
     const board = new GameBoard();
     board.generate();
 
     const marker = new Marker();
-    marker.add(playerOne.getMarker());
+    marker.add();
 }
 
 displayController();
+
+function printResult() {
+    const section = document.getElementById('result');
+    const result = document.createElement('p');
+    if(XWin) {
+        result.textContent = 'X WON!';
+        section.appendChild(result);
+    }
+    else if(OWin) {
+        result.textContent = 'O WON!';
+        section.appendChild(result);
+    }
+    else if(round === 9){
+        result.textContent = 'Tie!';
+        section.appendChild(result);
+    }
+}
+
+function disableGrid() {
+    const lockGrid = new Marker();
+    lockGrid.disable();
+}
+
+const restart = document.getElementById('restart');
+restart.addEventListener('click', () => {
+    window.location.reload();
+})
