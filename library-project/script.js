@@ -93,16 +93,19 @@ const addNewBook = () => {
     title.setAttribute('type', 'text');
     title.setAttribute('id', 'title');
     title.setAttribute('placeholder', 'Title');
+    title.setAttribute('required', '');
 
     const author = document.createElement('input');
     author.setAttribute('type', 'text');
     author.setAttribute('id', 'author');
     author.setAttribute('placeholder', 'Author');
+    author.setAttribute('required', '');
 
     const pageCount = document.createElement('input');
     pageCount.setAttribute('type', 'number');
     pageCount.setAttribute('id', 'numberOfPages');
     pageCount.setAttribute('placeholder', 'Number_Of_Pages');
+    pageCount.setAttribute('required', '');
 
     const submit = document.createElement('input');
     submit.setAttribute('type', 'submit');
@@ -141,11 +144,12 @@ const addNewBook = () => {
 
     const formSubmit = document.getElementById('formSubmit');
     return formSubmit.addEventListener('click', (e) => {
-        e.preventDefault();
         const bookTitle = document.getElementById('title').value;
         const bookAuthor = document.getElementById('author').value;
         const pageNumber = document.getElementById('numberOfPages').value;
 
+        if(!bookTitle.validity.valid || !bookAuthor.validity.valid || !pageNumber.validity.valid)
+            e.preventDefault();
         const new_book = new Book(bookTitle, bookAuthor, pageNumber, bookReadStatus);
         new_book.addBookToLibrary();
         form.style = '';
