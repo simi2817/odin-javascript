@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8"/>
+    <title>Form validation: Task 2</title>
+    <style>
+      body {
+        background-color: #fff;
+        color: #333;
+        font: 1em / 1.4 Helvetica Neue, Helvetica, Arial, sans-serif;
+        padding: 1em;
+        margin: 0;
+      }
+
+      * {
+        box-sizing: border-box;
+      }
+      input:invalid {
+        border-color: #900;
+        background-color: #fdd;
+        }
+
+    input:focus:invalid {
+    outline: none;
+    }
+    .error {
+    width: 100%;
+    padding: 0;
+
+    font-size: 80%;
+    color: white;
+    background-color: #900;
+    border-radius: 0 0 5px 5px;
+
+    box-sizing: border-box;
+    }
+
+    .error.active {
+    padding: 0.3em;
+    }
+    </style>
+  </head>
+
+  <body>
+    <form>
+      <h2>Enter your support query</h2>
+      <ul>
+        <li>
+          <label for="uname">User name:</label>
+          <input type="text" name="uname" id="uname" pattern="[a-z]{1}[.]{1}[a-z]{3,4}" maxlength="6" required>
+          <span class="error" aria-live="polite"></span>
+        </li>
+        <li>
+          <label for="email">Email address:</label>
+          <input type="text" name="email" id="email" pattern="" required>
+          <span class="error" aria-live="polite"></span>
+        </li>
+        <li>
+          <label for="phone">Phone number:</label>
+          <input type="text" name="phone" id="phone" minlength="10"
+          maxlength="15" required>
+        </li>
+        <li>
+          <label for="comment">Comment:</label>
+          <textarea name="comment" id="comment" maxlength="200" required>
+          </textarea>
+        </li>
+        <li>
+          <button>Submit comment</button>
+        </li>
+      </ul>
+    </form>
+  </body>
+  <script>
+    const form = document.querySelector("form");
+    const input = document.querySelectorAll('input');
+    const uname = document.getElementById('uname');
+    const email = document.getElementById('email');
+    const emailError = document.querySelector("span.error");
+    form.addEventListener('input', (e) => {
+        if(email.validity.valid || uname.validity.valid) {
+            emailError.textContent = "";
+            emailError.className = "error"; 
+        }
+        else
+            showError();
+    });
+    form.addEventListener('submit', (e) => {
+        if (!uname.validity.valid || !email.validity.valid) {
+            showError();
+            e.preventDefault();
+        }
+    });
+    const showError = () => {
+        if(uname.validity.patternMismatch) {
+            console.log('username mismatch');
+        }
+        else if(email.validity.patternMismatch) {
+            console.log('email mismatch');
+        }
+        emailError.className = "error active";
+    }
+  </script>
+</html>
