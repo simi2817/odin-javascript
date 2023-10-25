@@ -3,6 +3,7 @@ import getDate from './getDate';
 import displayComponent from './displayComponent';
 import priorityColor from './priorityColor';
 import deleteList from './deleteList';
+import editList from './editList';
 
 export default function generateList(storage) {
   const listContainer = document.createElement('div');
@@ -51,6 +52,14 @@ export default function generateList(storage) {
       date.textContent = dueDate;
       date.classList.add('date');
       section.appendChild(date);
+
+      const editButton = document.createElement('button');
+      editButton.classList.add('editButton');
+      editButton.textContent = 'Edit';
+      editButton.addEventListener('click', () => {
+        editList(list.title);
+      });
+      section.appendChild(editButton);
 
       listContainer.appendChild(section);
     }
