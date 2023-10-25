@@ -22,24 +22,20 @@ class Book  {
 
     displayBook() {
     bookContainer.innerHTML = '';
-
 	    myLibrary.forEach((book) => {
 		const bookBox = document.createElement('div');
 		bookBox.classList.add('bookBox');
     
 		const bookTitle = document.createElement('h2');
 		bookTitle.classList.add('bookTitle');
-        bookTitle.style.margin = '0em';
 		bookTitle.innerText = book.title;
 
 		const bookAuthor = document.createElement('p');
 		bookAuthor.classList.add('bookAuthor');
-        bookAuthor.style.margin = '0em';
 		bookAuthor.innerText = `By ${book.author}`;
 
 		const bookPages = document.createElement('p');
 		bookPages.classList.add('bookPages');
-        bookPages.style.margin = '0em';
 		bookPages.innerText = `${book.numberOfPages} pages`;
 
         const buttonContainer = document.createElement('div');
@@ -49,66 +45,47 @@ class Book  {
         removeBook.innerHTML = 'X';
         removeBook.classList.add('removeBook');
         removeBook.setAttribute('id', `${book.title}`);
-        removeBook.style.border = '1px solid blue';
-        removeBook.style.boxShadow = '0 0 10px';
         
         removeBook.addEventListener('click', (e) => {
-            bookBox.innerHTML = '';
-            bookBox.style = '';
+            bookContainer.removeChild(bookBox);
             myLibrary = myLibrary.filter((book) => book.title !== e.target.id);
         });
 
-        // const editBook = document.createElement('button');
-        // editBook.innerHTML = "<img src = \"./images/edit-icon.png\" height=\"20px\" width=\"20px\" alt=\"edit-icon-image\">";
-        // editBook.classList.add('editBook');
-        // editBook.setAttribute('id', `${book.title}`);
-        // editBook.style.border = 'none';
-        // editBook.style.backgroundColor = 'rgb(234, 196, 168)';
-        // editBook.style.margin = '0px';
-        // editBook.style.padding = '0px';
-        // editBook.style.border = '1px solid blue';
-        // editBook.style.boxShadow = '0 0 10px';
-
+        bookBox.appendChild(removeBook);
+        bookBox.appendChild(lineBreak.cloneNode());
+		bookBox.appendChild(bookTitle);
+        bookBox.appendChild(lineBreak.cloneNode());
+		bookBox.appendChild(bookAuthor);
+        bookBox.appendChild(lineBreak.cloneNode());
+		bookBox.appendChild(bookPages);   
+        bookBox.appendChild(lineBreak.cloneNode()); 
         const readIcon = document.createElement('p');
         readIcon.classList.add('readIcon');
-        readIcon.innerHTML = "<img src = \"./images/tick-icon.png\" height=\"20px\" width=\"20px\" alt=\"tick-icon-image\">";
-
-		bookBox.appendChild(bookTitle);
-		bookBox.appendChild(bookAuthor);
-		bookBox.appendChild(bookPages);
-        buttonContainer.appendChild(removeBook);
-        buttonContainer.appendChild(editBook);
-        buttonContainer.style.display = 'flex';
-        buttonContainer.style.justifyContent = 'space-around';
-        bookBox.appendChild(buttonContainer);
-        bookBox.appendChild(readIcon);
-        
-        bookBox.style.border = '1px solid brown';
-        bookBox.style.boxShadow = '0 0 10px';
-        bookBox.style.backgroundColor = 'rgb(234, 196, 168)';
-        bookBox.style.display = 'flex';
-        bookBox.style.flexDirection = 'column';
-        bookBox.style.justifyContent = 'space-evenly';
-        bookBox.style.flexWrap = 'wrap';
-        bookBox.style.margin = '10px';
-        bookBox.style.padding = '20px';
-        bookBox.style.width = '500%';
-        bookBox.style.height = '100%';
-
-
-		bookContainer.appendChild(bookBox);
+        if(book.isRead === 'true') {
+            readIcon.innerHTML = `<img src = \"./images/read-icon.png\" height=\"40px\" width=\"40px\" alt=\"read-icon-image\">`; 
+        }
+        else {
+            readIcon.innerHTML = `<img src = \"./images/not-read-icon.jpeg\" height=\"40px\" width=\"40px\" alt=\"not-read-icon-image\">`; 
+        }
+        readIcon.addEventListener('click', () => {
+            book.isRead = !book.isRead;
+        });
+        bookBox.appendChild(readIcon); 
+        bookContainer.appendChild(bookBox);
     });
 
         return container.appendChild(bookContainer);
-    }   
+    }
 }
 
 const addNewBook = () => {
-
-    const lineBreak = document.createElement('br');
-
     const form = document.createElement('form');
     form.classList.add('form');
+    form.style.padding = '40px';
+    form.style.backgroundColor = 'lightgrey';
+    form.style.borderRadius = '20px';
+    form.style.border = '2px solid grey';
+    form.style.boxShadow = '0 0 10px';
     form.setAttribute('method', 'post');
     form.setAttribute('action', 'submit.php');
 
@@ -153,23 +130,13 @@ const addNewBook = () => {
         input.name = 'status';
         input.addEventListener('change', (e) => {
             bookReadStatus = e.target.value;
-            Object.keys(options).forEach(key => {
-                options[key] = false;
-            });
-                options[key] = true;
             });
         label.appendChild(input);
         form.appendChild(label);
     }
     form.appendChild(lineBreak.cloneNode());
-
     form.appendChild(submit);
     form.appendChild(lineBreak.cloneNode());
-    form.style.padding = '40px';
-    form.style.backgroundColor = 'lightgrey';
-    form.style.borderRadius = '20px';
-    form.style.border = '2px solid grey';
-    form.style.boxShadow = '0 0 10px';
     formDisplay.appendChild(form);
 
     const formSubmit = document.getElementById('formSubmit');
@@ -180,12 +147,9 @@ const addNewBook = () => {
         const pageNumber = document.getElementById('numberOfPages').value;
 
         const new_book = new Book(bookTitle, bookAuthor, pageNumber, bookReadStatus);
-
         new_book.addBookToLibrary();
-
-        form.innerHTML = '';
         form.style = '';
-
+        form.innerHTML = '';  
         new_book.displayBook();
         });
     }
@@ -201,3 +165,5 @@ const addNewBook = () => {
 
     const container = document.getElementById('container');
     const bookContainer = document.getElementById('bookContainer');
+
+    const lineBreak = document.createElement('br');
