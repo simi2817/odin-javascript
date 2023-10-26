@@ -22,8 +22,6 @@ export default function updateStorage(storage, projectName) {
       priority: prior,
     });
   }
-
   console.log(storage);
-
   return storage;
 }
