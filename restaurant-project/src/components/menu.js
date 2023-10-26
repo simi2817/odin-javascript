@@ -10,7 +10,7 @@ function menu() {
         section.appendChild(title);
 
         const image = document.createElement('img');
-        image.src = `/restaurant-project/src/assets/${item.image}.jpeg`;
+        image.src = `/src/assets/${item.image}.jpeg`;
         image.alt = `Image of ${item.image}`;
         image.height = 200;
         image.width = 200;
