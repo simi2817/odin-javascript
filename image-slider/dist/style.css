@@ -1,0 +1,58 @@
+h1 {
+    text-align: center;
+}
+
+#picFrame {
+    position: relative; 
+    overflow: hidden; 
+    margin: 100px auto 0 auto;
+    display: flex; 
+    justify-content: center; 
+    align-items: center; 
+    width: 1000px;
+    height: 650px;
+    outline: solid 5px rgb(128, 94, 36); 
+  }
+
+  .pic{
+    position: absolute;
+    transition: left 0.3s;
+  }
+  
+  #pic1{
+    left: 0px;
+  }
+  
+  #pic2{
+    left: 1000px;
+  }
+  
+  #pic3{
+    left: 2000px;
+  }
+  
+  #pic4{
+    left: 3000px;
+  }
+
+  #pic5{
+    left: 4000px;
+  }
+  
+  img{
+    width: 1000px;
+  }
+  
+  .arrow{
+    font-size: 35px;
+    margin: 570px 55px 0 55px;
+    opacity: 60%;
+    padding: 15px;
+    border-radius: 10px;
+  }
+  
+  #picSelector{
+    position: absolute;
+    bottom: 45px;
+    width: fit-content;
+  }
